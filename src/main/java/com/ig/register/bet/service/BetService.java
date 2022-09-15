@@ -3,6 +3,7 @@ package com.ig.register.bet.service;
 import com.ig.register.bet.dto.StatisticDTO;
 import com.ig.register.bet.model.Bet;
 import com.ig.register.bet.repository.BetRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,36 @@ public class BetService {
     @Autowired
     private BetRepository betRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     public List<Bet> getAll() {
         return betRepository.findAll();
     }
 
+    public List<Bet> getBetByUsuarioId(Integer id) {
+
+        return betRepository.findBetByUsuarioId(id);
+    }
+
+
     public Bet createBet(Bet newBet) {
-        return betRepository.save(newBet);
+
+        Bet bet = new Bet();
+
+        bet.setId(null);
+        bet.setEvento(newBet.getEvento());
+        bet.setData(newBet.getData());
+        bet.setOdd(newBet.getOdd());
+        bet.setLucro(newBet.getLucro());
+        bet.setAposta(newBet.getAposta());
+        bet.setCompeticao(newBet.getCompeticao());
+        bet.setEsporte(newBet.getEsporte());
+        bet.setMercado(newBet.getMercado());
+        bet.setUsuario(usuarioService.consultarUsuarioPorId(newBet.getUsuario().getId()));
+
+
+        return betRepository.save(bet);
     }
 
 

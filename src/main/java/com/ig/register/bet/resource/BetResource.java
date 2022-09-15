@@ -22,13 +22,20 @@ public class BetResource {
         return betService.getAll();
     }
 
+    @GetMapping("/bet/{id}")
+    List<Bet> getBetByUsuarioId(@PathVariable Integer id) {
+        return betService.getBetByUsuarioId(id);
+    }
+
     @PostMapping("/bet")
     Bet createAposta(@RequestBody Bet newBet) {
+
         return betService.createBet(newBet);
     }
 
     @PutMapping("bet/{id}")
     Optional<Bet> editBet(@RequestBody Bet newBet, @PathVariable Integer id) {
+
         return betService.editBet(newBet, id);
     }
 

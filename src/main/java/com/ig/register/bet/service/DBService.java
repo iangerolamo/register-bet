@@ -2,9 +2,11 @@ package com.ig.register.bet.service;
 
 import com.ig.register.bet.model.Bet;
 import com.ig.register.bet.model.Usuario;
+import com.ig.register.bet.model.enums.Perfil;
 import com.ig.register.bet.repository.BetRepository;
 import com.ig.register.bet.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,9 +25,21 @@ public class DBService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder pe;
+
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public void instantiateTestDatabase() throws ParseException {
+
+
+        Usuario usuario1 = new Usuario(
+                null,
+                "ian",
+                pe.encode("123456"),
+                "ian@gmail.com",
+                "Ian Gerolamo",
+                LocalDate.of(2022, 8, 25));
 
 
         Bet bet_1 = new Bet(
@@ -37,7 +51,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(20),
-                new BigDecimal(3)
+                new BigDecimal(3),
+                usuario1
         );
 
         Bet bet_2 = new Bet(
@@ -49,7 +64,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(5),
-                new BigDecimal(1.50)
+                new BigDecimal(1.50),
+                usuario1
         );
 
         Bet bet_3 = new Bet(
@@ -61,7 +77,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(4.5)
+                new BigDecimal(4.5),
+                usuario1
         );
 
         Bet bet_4 = new Bet(
@@ -73,7 +90,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(8),
-                new BigDecimal(1.8)
+                new BigDecimal(1.8),
+                usuario1
         );
 
         Bet bet_5 = new Bet(
@@ -85,7 +103,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(19),
-                new BigDecimal(2.9)
+                new BigDecimal(2.9),
+                usuario1
         );
 
         Bet bet_6 = new Bet(
@@ -97,7 +116,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(3.3)
+                new BigDecimal(3.3),
+                usuario1
         );
 
         Bet bet_7 = new Bet(
@@ -109,7 +129,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(2.5)
+                new BigDecimal(2.5),
+                usuario1
         );
 
         Bet bet_8 = new Bet(
@@ -121,7 +142,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(1.6)
+                new BigDecimal(1.6),
+                usuario1
         );
 
         Bet bet_9 = new Bet(
@@ -133,7 +155,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(24),
-                new BigDecimal(3.4)
+                new BigDecimal(3.4),
+                usuario1
         );
 
         Bet bet_10 = new Bet(
@@ -145,7 +168,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(2.75)
+                new BigDecimal(2.75),
+                usuario1
         );
 
         Bet bet_11 = new Bet(
@@ -157,7 +181,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(7.5),
-                new BigDecimal(1.75)
+                new BigDecimal(1.75),
+                usuario1
         );
 
         Bet bet_12 = new Bet(
@@ -169,7 +194,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(3.4)
+                new BigDecimal(3.4),
+                usuario1
         );
 
         Bet bet_13 = new Bet(
@@ -181,7 +207,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(5.3),
-                new BigDecimal(1.53)
+                new BigDecimal(1.53),
+                usuario1
         );
 
         Bet bet_14 = new Bet(
@@ -193,7 +220,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(2.20)
+                new BigDecimal(2.20),
+                usuario1
         );
 
         Bet bet_15 = new Bet(
@@ -205,7 +233,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(7.50)
+                new BigDecimal(7.50),
+                usuario1
         );
 
         Bet bet_16 = new Bet(
@@ -217,7 +246,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(19),
-                new BigDecimal(2.90)
+                new BigDecimal(2.90),
+                usuario1
         );
 
         Bet bet_17 = new Bet(
@@ -229,7 +259,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(-10),
-                new BigDecimal(5)
+                new BigDecimal(5),
+                usuario1
         );
 
         Bet bet_18 = new Bet(
@@ -241,7 +272,8 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(6.1),
-                new BigDecimal(1.61)
+                new BigDecimal(1.61),
+                usuario1
         );
 
         Bet bet_19 = new Bet(
@@ -253,23 +285,13 @@ public class DBService {
                 "Winner",
                 new BigDecimal(10),
                 new BigDecimal(70),
-                new BigDecimal(8)
+                new BigDecimal(8),
+                usuario1
         );
 
-        Usuario usuario = new Usuario(
-                null,
-                "iangerolamo",
-                "123456",
-                "iangerolamo@gmail.com",
-                "Ian Gerolamo",
-                LocalDate.of(2022, 7, 21),
-                Arrays.asList(bet_1, bet_2, bet_3, bet_4, bet_5, bet_6, bet_7, bet_8, bet_9, bet_10,
-                        bet_11, bet_12, bet_13, bet_14, bet_15, bet_16, bet_17, bet_18));
 
+        usuarioRepository.saveAll(List.of(usuario1));
         betRepository.saveAll(Arrays.asList(bet_1, bet_2, bet_3, bet_4, bet_5, bet_6, bet_7, bet_8, bet_9, bet_10,
-                                            bet_11, bet_12, bet_13, bet_14, bet_15, bet_16, bet_17, bet_18, bet_19));
-
-        usuarioRepository.saveAll(List.of(usuario));
-
+                bet_11, bet_12, bet_13, bet_14, bet_15, bet_16, bet_17, bet_18, bet_19));
     }
 }
